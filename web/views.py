@@ -10,6 +10,7 @@ class Printer:
         self.queues = {}
 
     def write(self, value):
+        '''handle stdout'''
         queue = self.queues.get(current_thread().name)
         if queue:
             queue.put(value)
@@ -17,14 +18,17 @@ class Printer:
             sys.__stdout__.write(value)
 
     def flush(self):
+        '''Django would crash without this'''
         pass
 
     def register(self, thread):
+        '''註冊一個 Thread'''
         queue = Queue()
         self.queues[thread.name] = queue
         return queue
 
     def clean(self, thread):
+        '''刪除一個 Thread'''
         del self.queues[thread.name]
 
 
