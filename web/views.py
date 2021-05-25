@@ -32,7 +32,7 @@ printer = Printer()
 sys.stdout = printer
 
 
-class Executer:
+class Steamer:
     def __init__(self, target, args):
         self.thread = Thread(target=target, args=args)
         self.queue = printer.register(self.thread)
@@ -58,6 +58,6 @@ def job(times):
     time.sleep(0.5)
 
 
-def execute(request):
-    executer = Executer(job, (10,))
-    return StreamingHttpResponse(executer.start())
+def stream(request):
+    streamer = Steamer(job, (10,))
+    return StreamingHttpResponse(streamer.start())

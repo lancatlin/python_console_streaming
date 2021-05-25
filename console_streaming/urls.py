@@ -19,5 +19,5 @@ from web import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('stream/', views.execute)
+    path('stream/', views.stream)
 ]
